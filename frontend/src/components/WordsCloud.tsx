@@ -49,9 +49,9 @@ const EmptyData = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <CloudOff color="primary" sx={{ fontSize: 200 }} />
+      <CloudOff color="primary" sx={{ fontSize: 150 }} />
       <Typography variant="overline" >
-        Select a dataset to generate the word clouds
+        Select a dataset to generate the words cloud!
       </Typography>
     </Box>
   )
