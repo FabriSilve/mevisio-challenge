@@ -86,6 +86,7 @@ const DatasetModal = () => {
               type="file"
               onChange={handleFileChange}
               error={!!fileError}
+              inputProps={{ accept: 'text/plain' }}
             />
             <Typography variant="body2" color="error">
               {fileError}
