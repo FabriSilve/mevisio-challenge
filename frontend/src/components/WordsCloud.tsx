@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
@@ -14,17 +16,17 @@ import { useContextState } from "../ContextProvider";
 const WordsCloud = () => {
   const { analysedWords, loading } = useContextState();
 
-  const wordsCloudSize: [number, number] = [
+  const wordsCloudSize: [number, number] = useMemo(() => [
     window.innerWidth,
     window.innerHeight * 0.9,
-  ];
-  const options: Optional<Options> = {
+  ], []);
+  const options: Optional<Options> = useMemo(() => ({
     fontSizes: [30, 110],
-  };
+  }), []);
 
-  const callbacks: CallbacksProp = {
-    getWordTooltip: (_word) => '',
-  }
+  const callbacks: CallbacksProp = useMemo(() => ({
+    getWordTooltip: (_) => '',
+  }), []);
   return (
     <Box
       marginTop="64px"
@@ -62,7 +64,6 @@ const WordsCloud = () => {
           />
         ) : null}
       </Box>
-
     </Box>
   )
 };
