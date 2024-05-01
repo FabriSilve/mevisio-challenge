@@ -1,9 +1,13 @@
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
-import CloudOff from '@mui/icons-material/CloudOff';
+import CloudOff from "@mui/icons-material/CloudOff";
 
-import ReactWordcloud, {  Optional, Options } from 'react-wordcloud';
+import ReactWordcloud, {
+  Optional,
+  Options,
+  CallbacksProp,
+} from "react-wordcloud";
 
 import { useContextState } from "../ContextProvider";
 
@@ -17,6 +21,10 @@ const WordsCloud = () => {
   const options: Optional<Options> = {
     fontSizes: [30, 110],
   };
+
+  const callbacks: CallbacksProp = {
+    getWordTooltip: (_word) => '',
+  }
   return (
     <Box
       marginTop="64px"
@@ -50,6 +58,7 @@ const WordsCloud = () => {
             words={analysedWords}
             size={wordsCloudSize}
             options={options}
+            callbacks={callbacks}
           />
         ) : null}
       </Box>
