@@ -20,10 +20,12 @@ const streamAnalyser = async (fileReader: EventEmitter) => {
       });
 
       fileReader.on('close', () => {
-        const wordsArray = Object.keys(wordsMap).map((key) => ({
-          text: key,
-          value: wordsMap[key],
-        }));
+        const wordsArray = Object.keys(wordsMap)
+          .map((key) => ({
+            text: key,
+            value: wordsMap[key],
+          }))
+          .sort((a, b) => b.value - a.value);
         resolve(wordsArray)
       });
     } catch (e) {
