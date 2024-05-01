@@ -3,8 +3,11 @@ import { IncomingMessage, ServerResponse } from "node:http";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { marked } from "marked";
+import { createInterface } from "readline";
+import { createReadStream } from "fs";
 
 import formParser from "./utils/formParser.js";
+import streamAnalyser from "./utils/streamAnalyser.js";
 
 createServer(router).listen(8126, () => {
   console.log("Listening on http://localhost:8126");
@@ -30,9 +33,20 @@ async function router(req: IncomingMessage, res: ServerResponse) {
 
       case "POST /api/file":
         const { fields, files } = await formParser(req);
-        console.log('Received data:', fields, files);
+
+        if (!files.file) {
+          throw new Error("No file uploaded!");
+        }
+        const fileStream = files.file[0].filepath;
+        const fileReader = createInterface({
+          input: createReadStream(fileStream),
+          output: process.stdout,
+          terminal: false
+        });
+        const result = await streamAnalyser(fileReader);
+
         res.writeHead(200);
-        res.write("OK");
+        res.write(JSON.stringify(result));
         break;
 
       default:
