@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 
+import AppHeader from "./components/AppHeader";
+
 export function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error>();
@@ -26,6 +28,7 @@ export function App() {
       alignItems="center"
       justifyContent="center"
     >
+      <AppHeader />
       {isLoading ? "Loading..." : null}
       <article dangerouslySetInnerHTML={{ __html: html }} />
     </Box>
