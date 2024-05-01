@@ -24,7 +24,8 @@ const Loader = () => {
 }
 
 const EmptyData = () => {
-  const { analysedWords } = useContextState();
+  const { analysedWords, loading } = useContextState();
+  if (loading) return null;
   if (analysedWords && analysedWords.length) return null;
   return (
     <Box
@@ -42,7 +43,7 @@ const EmptyData = () => {
 }
 
 const WordsChart = () => {
-  const { analysedWords } = useContextState();
+  const { analysedWords, loading } = useContextState();
 
   const wordsCloudSize: [number, number] = useMemo(() => [
     window.innerWidth,
@@ -55,6 +56,7 @@ const WordsChart = () => {
     getWordTooltip: (_) => '',
   }), []);
 
+  if (loading) return null;
   if (!analysedWords || !analysedWords.length) return null;
 
   return (
