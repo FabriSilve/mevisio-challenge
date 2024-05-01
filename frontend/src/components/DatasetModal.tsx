@@ -10,6 +10,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Input from '@mui/material/Input';
 
+import { useContextState, useContextActions } from '../ContextProvider';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -28,6 +30,9 @@ const DatasetModal = () => {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<Blob | null>(null);
 
+  const { loading } = useContextState();
+  const { sendFileToAnalyse } = useContextActions();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -38,17 +43,9 @@ const DatasetModal = () => {
 
   const handleSubmit = useCallback<MouseEventHandler<HTMLElement>>((event) => {
     event.preventDefault();
-    if (!file) {
-      return;
-    }
-    const formData = new FormData();
-    formData.append("file", file);
-    fetch('/api/file',
-      {
-        method: 'post',
-        body: formData,
-      },
-    ).then(async (response) => console.log(await response.json()));
+    if (!file) return;
+    sendFileToAnalyse(file);
+    setOpen(false);
   }, [file]);
 
   return (
@@ -90,7 +87,7 @@ const DatasetModal = () => {
             <Button
               onClick={handleSubmit}
               variant="contained"
-              disabled={!file}
+              disabled={!file || loading}
             >
               Send Dataset
             </Button>
