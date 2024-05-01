@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 
 export function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,9 +20,14 @@ export function App() {
   }
 
   return (
-    <Container maxWidth="lg">
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+    >
       {isLoading ? "Loading..." : null}
       <article dangerouslySetInnerHTML={{ __html: html }} />
-    </Container>
+    </Box>
   );
 }
