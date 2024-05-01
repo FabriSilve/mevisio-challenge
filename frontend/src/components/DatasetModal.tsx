@@ -98,7 +98,13 @@ const DatasetModal = () => {
             gap={2}
             marginTop={4}
           >
-            <Button onClick={handleClose} variant="outlined" color="error">Cancel</Button>
+            <Button
+              onClick={handleClose}
+              variant="outlined"
+              color="error"
+            >
+              Close
+            </Button>
             <Button
               onClick={handleSubmit}
               variant="contained"
