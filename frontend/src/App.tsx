@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 
 import AppHeader from "./components/AppHeader";
 import WordsCloud from "./components/WordsCloud";
+import WordsInfo from "./components/WordsInfo";
 
 const App = () => (
   <Box
@@ -13,6 +14,7 @@ const App = () => (
   >
     <AppHeader />
     <WordsCloud />
+    <WordsInfo />
   </Box>
 );
 
