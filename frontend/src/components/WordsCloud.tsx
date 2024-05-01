@@ -3,12 +3,20 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import CloudOff from '@mui/icons-material/CloudOff';
 
-import ReactWordcloud from 'react-wordcloud';
+import ReactWordcloud, {  Optional, Options } from 'react-wordcloud';
 
 import { useContextState } from "../ContextProvider";
 
 const WordsCloud = () => {
   const { analysedWords, loading } = useContextState();
+
+  const wordsCloudSize: [number, number] = [
+    window.innerWidth,
+    window.innerHeight * 0.9,
+  ];
+  const options: Optional<Options> = {
+    fontSizes: [30, 110],
+  };
   return (
     <Box
       marginTop="64px"
@@ -40,6 +48,8 @@ const WordsCloud = () => {
         {analysedWords && analysedWords.length ? (
           <ReactWordcloud
             words={analysedWords}
+            size={wordsCloudSize}
+            options={options}
           />
         ) : null}
       </Box>
