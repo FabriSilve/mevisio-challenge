@@ -2,7 +2,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+
+import DatasetModal from './DatasetModal';
 
 const AppHeader = () => {
   return (
@@ -12,7 +13,7 @@ const AppHeader = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Words Cloud Generator
           </Typography>
-          <Button color="inherit">Select Dataset</Button>
+          <DatasetModal />
         </Toolbar>
       </AppBar>
     </Box>
