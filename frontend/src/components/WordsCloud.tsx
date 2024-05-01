@@ -15,8 +15,34 @@ import { useContextState } from "../ContextProvider";
 
 const HEADER_HEIGHT = '64px';
 
-const WordsCloud = () => {
-  const { analysedWords, loading } = useContextState();
+const Loader = () => {
+  const { loading } = useContextState();
+  if (!loading) return null;
+  return (
+    <CircularProgress color="inherit" />
+  )
+}
+
+const EmptyData = () => {
+  const { analysedWords } = useContextState();
+  if (analysedWords && analysedWords.length) return null;
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <CloudOff color="primary" sx={{ fontSize: 200 }} />
+      <Typography variant="overline" >
+        Select a dataset to generate the word clouds
+      </Typography>
+    </Box>
+  )
+}
+
+const WordsChart = () => {
+  const { analysedWords } = useContextState();
 
   const wordsCloudSize: [number, number] = useMemo(() => [
     window.innerWidth,
@@ -29,45 +55,35 @@ const WordsCloud = () => {
     getWordTooltip: (_) => '',
   }), []);
 
+  if (!analysedWords || !analysedWords.length) return null;
+
   return (
-    <Box
-      marginTop={HEADER_HEIGHT}
-      flexGrow={1}
-      width="100%"
-      display="flex"
-      alignContent="center"
-      justifyContent="center"
-      maxHeight={`calc(100% - ${HEADER_HEIGHT})`}
-      component="section"
-    >
-      <Box margin="auto" maxHeight="100%">
-        {loading ? (
-          <CircularProgress color="inherit" />
-        ) : null}
-        {!analysedWords || !analysedWords.length ? (
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <CloudOff color="primary" sx={{ fontSize: 200 }} />
-            <Typography variant="overline" >
-              Select a dataset to generate the word clouds
-            </Typography>
-          </Box>
-        ) : null}
-        {analysedWords && analysedWords.length ? (
-          <ReactWordcloud
-            words={analysedWords}
-            size={wordsCloudSize}
-            options={options}
-            callbacks={callbacks}
-          />
-        ) : null}
-      </Box>
-    </Box>
+    <ReactWordcloud
+      words={analysedWords}
+      size={wordsCloudSize}
+      options={options}
+      callbacks={callbacks}
+    />
   )
-};
+}
+
+const WordsCloud = () => (
+  <Box
+    marginTop={HEADER_HEIGHT}
+    flexGrow={1}
+    width="100%"
+    display="flex"
+    alignContent="center"
+    justifyContent="center"
+    maxHeight={`calc(100% - ${HEADER_HEIGHT})`}
+    component="section"
+  >
+    <Box margin="auto" maxHeight="100%">
+      <Loader />
+      <EmptyData />
+      <WordsChart />
+    </Box>
+  </Box>
+);
 
 export default WordsCloud;
