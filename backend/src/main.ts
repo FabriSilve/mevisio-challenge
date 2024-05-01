@@ -26,6 +26,12 @@ async function router(req: IncomingMessage, res: ServerResponse) {
         );
         break;
 
+      case "POST /api/file":
+          console.log('Received data');
+          res.writeHead(200);
+          res.write("OK");
+          break;
+
       default:
         res.writeHead(404);
         res.write("Not Found");
