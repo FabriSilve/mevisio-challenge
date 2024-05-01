@@ -32,7 +32,7 @@ async function router(req: IncomingMessage, res: ServerResponse) {
         break;
 
       case "POST /api/file":
-        const { fields, files } = await formParser(req);
+        const { files } = await formParser(req);
 
         if (!files.file) {
           throw new Error("No file uploaded!");
