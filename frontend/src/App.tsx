@@ -1,28 +1,21 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import Box from "@mui/material/Box";
 
-export function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error>();
-  const [html, setHtml] = useState("");
+import AppHeader from "./components/AppHeader";
+import WordsCloud from "./components/WordsCloud";
+import WordsInfo from "./components/WordsInfo";
 
-  useEffect(() => {
-    fetch("/api/challenge")
-      .then((r) => r.text())
-      .then(setHtml)
-      .catch(setError)
-      .finally(() => setIsLoading(false));
-  }, []);
+const App = () => (
+  <Box
+    display="flex"
+    flexDirection="column"
+    alignItems="center"
+    justifyContent="center"
+    height="100vh"
+  >
+    <AppHeader />
+    <WordsCloud />
+    <WordsInfo />
+  </Box>
+);
 
-  if (error != null) {
-    console.error(error);
-    return <div>Error! Check console...</div>;
-  }
-
-  return (
-    <div className="App">
-      {isLoading ? "Loading..." : null}
-      <article dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
-  );
-}
+export default App;
