@@ -3,6 +3,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import CloudOff from '@mui/icons-material/CloudOff';
 
+import ReactWordcloud from 'react-wordcloud';
+
 import { useContextState } from "../ContextProvider";
 
 const WordsCloud = () => {
@@ -37,25 +39,9 @@ const WordsCloud = () => {
           </Box>
         ) : null}
         {analysedWords && analysedWords.length ? (
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Typography variant="h5" color="primary">
-              Words Cloud
-            </Typography>
-            <Box
-              display="flex"
-              flexDirection="row"
-              flexWrap="wrap"
-              justifyContent="center"
-              gap={1}
-            >
-              {JSON.stringify(analysedWords)}
-            </Box>
-          </Box>
+          <ReactWordcloud
+            words={analysedWords}
+          />
         ) : null}
       </Box>
 
