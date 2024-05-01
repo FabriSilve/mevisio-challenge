@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 
 import AppHeader from "./components/AppHeader";
+import WordsCloud from "./components/WordsCloud";
 
 export function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,8 +28,10 @@ export function App() {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
+      height="100vh"
     >
       <AppHeader />
+      <WordsCloud />
       {isLoading ? "Loading..." : null}
       <article dangerouslySetInnerHTML={{ __html: html }} />
     </Box>
