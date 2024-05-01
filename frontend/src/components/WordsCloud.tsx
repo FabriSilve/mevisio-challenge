@@ -13,6 +13,8 @@ import ReactWordcloud, {
 
 import { useContextState } from "../ContextProvider";
 
+const HEADER_HEIGHT = '64px';
+
 const WordsCloud = () => {
   const { analysedWords, loading } = useContextState();
 
@@ -29,13 +31,13 @@ const WordsCloud = () => {
 
   return (
     <Box
-      marginTop="64px"
+      marginTop={HEADER_HEIGHT}
       flexGrow={1}
       width="100%"
       display="flex"
       alignContent="center"
       justifyContent="center"
-      maxHeight="calc(100% - 64px)"
+      maxHeight={`calc(100% - ${HEADER_HEIGHT})`}
       component="section"
     >
       <Box margin="auto" maxHeight="100%">
