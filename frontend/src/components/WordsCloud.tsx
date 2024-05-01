@@ -11,17 +11,16 @@ const WordsCloud = () => {
   const { analysedWords, loading } = useContextState();
   return (
     <Box
-      marginTop={8}
+      marginTop="64px"
       flexGrow={1}
       width="100%"
       display="flex"
       alignContent="center"
       justifyContent="center"
-      maxHeight="100%"
-      overflow="scroll"
+      maxHeight="calc(100% - 64px)"
       component="section"
     >
-      <Box margin="auto">
+      <Box margin="auto" maxHeight="100%">
         {loading ? (
           <CircularProgress color="inherit" />
         ) : null}
