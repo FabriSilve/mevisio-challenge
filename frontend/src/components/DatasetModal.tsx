@@ -29,6 +29,7 @@ const style = {
 const DatasetModal = () => {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<Blob | null>(null);
+  const [fileError, setFileError] = useState('');
 
   const { loading } = useContextState();
   const { sendFileToAnalyse } = useContextActions();
@@ -39,14 +40,20 @@ const DatasetModal = () => {
   const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     if (!event || !event.target || !event.target.files) return;
     setFile(event.target.files[0]);
-  }, [setFile])
+    setFileError('');
+  }, [setFile, setFileError])
 
   const handleSubmit = useCallback<MouseEventHandler<HTMLElement>>((event) => {
     event.preventDefault();
-    if (!file) return;
+    setFileError('');
+    if (!file) {
+      setFileError('Please select a file to analyze.');
+      return;
+    }
     sendFileToAnalyse(file);
+    setFile(null);
     setOpen(false);
-  }, [file]);
+  }, [file, setFile, setFileError]);
 
   return (
     <>
@@ -66,15 +73,23 @@ const DatasetModal = () => {
             Select Dataset to Analyze
           </Typography>
           <Box
+            id="modal-description"
             display="flex"
             flexDirection="column"
             justifyContent="start"
             marginTop={2}
           >
-            <Typography id="modal-description" sx={{ mt: 2 }}>
+            <Typography sx={{ mt: 2 }}>
               Upload the file you want to analyze.
             </Typography>
-            <Input type="file" onChange={handleFileChange} />
+            <Input
+              type="file"
+              onChange={handleFileChange}
+              error={!!fileError}
+            />
+            <Typography variant="body2" color="error">
+              {fileError}
+            </Typography>
           </Box>
           <Box
             display="flex"
@@ -87,7 +102,7 @@ const DatasetModal = () => {
             <Button
               onClick={handleSubmit}
               variant="contained"
-              disabled={!file || loading}
+              disabled={loading}
             >
               Send Dataset
             </Button>
