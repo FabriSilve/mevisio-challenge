@@ -1,5 +1,7 @@
 import { EventEmitter } from "stream";
 
+import shouldIgnoreWord from "./shouldIgnoreWord.js";
+
 const streamAnalyser = async (fileReader: EventEmitter) => {
   return new Promise((resolve, reject) => {
     const wordsMap: Record<string, number> = {};
@@ -11,6 +13,7 @@ const streamAnalyser = async (fileReader: EventEmitter) => {
           .split(/\s+/)
           .forEach((word) => {
             const lower = word.toLowerCase();
+            if (shouldIgnoreWord(lower)) return;
             if (wordsMap[lower]) wordsMap[lower]++;
             else wordsMap[lower] = 1;
           });
