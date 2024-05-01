@@ -4,6 +4,8 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { marked } from "marked";
 
+import formParser from "./utils/formParser.js";
+
 createServer(router).listen(8126, () => {
   console.log("Listening on http://localhost:8126");
 });
@@ -27,10 +29,11 @@ async function router(req: IncomingMessage, res: ServerResponse) {
         break;
 
       case "POST /api/file":
-          console.log('Received data');
-          res.writeHead(200);
-          res.write("OK");
-          break;
+        const { fields, files } = await formParser(req);
+        console.log('Received data:', fields, files);
+        res.writeHead(200);
+        res.write("OK");
+        break;
 
       default:
         res.writeHead(404);
