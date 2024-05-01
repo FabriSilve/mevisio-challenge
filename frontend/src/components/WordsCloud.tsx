@@ -23,10 +23,10 @@ const WordsCloud = () => {
   const options: Optional<Options> = useMemo(() => ({
     fontSizes: [30, 110],
   }), []);
-
   const callbacks: CallbacksProp = useMemo(() => ({
     getWordTooltip: (_) => '',
   }), []);
+
   return (
     <Box
       marginTop="64px"
