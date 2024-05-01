@@ -19,7 +19,22 @@ const Loader = () => {
   const { loading } = useContextState();
   if (!loading) return null;
   return (
-    <CircularProgress color="inherit" />
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <CircularProgress
+        color="primary"
+        size={100}
+        thickness={2}
+        variant="indeterminate"
+      />
+      <Typography variant="overline">
+        Processing dataset...
+      </Typography>
+    </Box>
   )
 }
 
