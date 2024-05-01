@@ -1,10 +1,10 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import FilterDrama from '@mui/icons-material/FilterDrama';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import FilterDrama from "@mui/icons-material/FilterDrama";
 
-import DatasetModal from './DatasetModal.js';
+import DatasetModal from "./DatasetModal";
 
 const AppHeader = () => {
   return (

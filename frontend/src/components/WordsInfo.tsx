@@ -4,9 +4,9 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
 
 import { useContextState } from "../ContextProvider";
-import { Typography } from "@mui/material";
 
 const WordsInfo = () => {
   const [open, setOpen] = useState(false);

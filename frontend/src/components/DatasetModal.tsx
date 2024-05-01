@@ -3,14 +3,14 @@ import {
   useCallback,
   ChangeEvent,
   MouseEventHandler,
-} from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Input from '@mui/material/Input';
+} from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import Input from "@mui/material/Input";
 
-import { useContextState, useContextActions } from '../ContextProvider';
+import { useContextState, useContextActions } from "../ContextProvider";
 
 const style = {
   position: 'absolute',
